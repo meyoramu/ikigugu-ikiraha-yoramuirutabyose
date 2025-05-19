@@ -1456,7 +1456,7 @@
                 <span class="cart-total-amount">Rwf 0</span>
             </div>
             <button class="checkout-btn">
-                <i class="fas fa-lock"></i> Secure Checkout
+                <i class="fas fa-lock"></i>&nbsp;&nbsp;&nbsp;Secure Checkout
             </button>
         </div>
     </div>
@@ -1684,7 +1684,7 @@
                             <h3 class="product-title">${product.name}</h3>
                             <p class="product-desc">${product.description}</p>
                             <div class="product-footer">
-                                <span class="product-price">Rwf ${product.price.toFixed(2)}</span>
+                                <span class="product-price">Rwf ${product.price.toFixed(0)}</span>
                                 <button class="add-to-cart" data-id="${product.id}">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -1774,7 +1774,7 @@
                             <img src="${item.image}" alt="${item.name}" class="cart-item-img">
                             <div class="cart-item-details">
                                 <h4 class="cart-item-title">${item.name}</h4>
-                                <p class="cart-item-price">Rwf ${(item.price * item.quantity).toFixed(2)}</p>
+                                <p class="cart-item-price">Rwf ${(item.price * item.quantity).toFixed(0)}</p>
                                 <div class="cart-item-actions">
                                     <button class="quantity-btn minus" data-id="${item.id}">-</button>
                                     <span class="cart-item-quantity">${item.quantity}</span>
@@ -1800,7 +1800,7 @@
                 
                 // Update total
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                document.querySelector('.cart-total-amount').textContent = `$${total.toFixed(2)}`;
+                document.querySelector('.cart-total-amount').textContent = `Rwf ${total}`;
             }
             
             function updateQuantity(e) {
@@ -1993,12 +1993,12 @@
                             ${cart.map(item => `
                                 <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
                                     <span>${item.name} × ${item.quantity}</span>
-                                    <span>Rwf ${(item.price * item.quantity).toFixed(2)}</span>
+                                    <span>Rwf ${(item.price * item.quantity).toFixed(0)}</span>
                                 </div>
                             `).join('')}
                             <div style="border-top:1px solid #eee;margin:10px 0;padding-top:10px;display:flex;justify-content:space-between;font-weight:bold;">
                                 <span>Total</span>
-                                <span>Rwf ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</span>
+                                <span>Rwf ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(0)}</span>
                             </div>
                         </div>
                         <div style="margin-top:20px;">

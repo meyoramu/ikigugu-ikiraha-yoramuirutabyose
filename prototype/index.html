@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKIRAHA - The Ultimate IKIRAHA Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E55627;
+            --secondary: #004E89;
+            --accent: #FFBE0B;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --success: #2ECC71;
+            --danger: #E74C3C;
+            --warning: #F39C12;
+            --info: #3498DB;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+            --shadow-xl: 0 15px 25px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF8C42;
+            --primary-dark: #FF6B35;
+            --secondary: #4A90E2;
+            --accent: #FFD166;
+            --dark: #F8F9FA;
+            --light: #1A1A2E;
+            --success: #4CAF50;
+            --danger: #F44336;
+            --warning: #FFC107;
+            --info: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, textarea {
+            font-family: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(var(--light), 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] header {
+            background-color: rgba(26, 26, 46, 0.95);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary);
+            transform: rotate(30deg);
+        }
+
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: var(--radius-full);
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+            100% { transform: translateY(-50%) translateX(0); }
+        }
+
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: var(--radius-full);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: rgba(var(--primary), 0.1);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(var(--primary), 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            background-color: rgba(var(--primary), 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Products Section */
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        [data-theme="dark"] .product-card {
+            background-color: #2A2A3E;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .product-desc {
+            color: #AAA;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+            transform: rotate(90deg);
+        }
+
+        /* AR Preview Section */
+        .ar-section {
+            background: linear-gradient(135deg, rgba(var(--primary), 0.1), rgba(var(--secondary), 0.1));
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ar-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .ar-content {
+            flex: 1;
+        }
+
+        .ar-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .ar-desc {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .ar-viewer {
+            flex: 1;
+            height: 400px;
+            background-color: rgba(var(--primary), 0.1);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .ar-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: rgba(var(--primary), 0.05);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            margin: 0 15px;
+        }
+
+        [data-theme="dark"] .testimonial-card {
+            background-color: #2A2A3E;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        [data-theme="dark"] .testimonial-role {
+            color: #AAA;
+        }
+
+        /* IKIRAHA Generator */
+        .generator-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(var(--accent), 0.1), rgba(var(--primary), 0.1));
+        }
+
+        .generator-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .generator-controls {
+            flex: 1;
+        }
+
+        .generator-preview {
+            flex: 1;
+            height: 400px;
+            background-color: rgba(var(--accent), 0.1);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .IKIRAHA-3d {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .IKIRAHA-model {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .control-range {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: var(--radius-full);
+            outline: none;
+        }
+
+        .control-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: var(--radius-full);
+            background: white;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .flavor-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .flavor-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .flavor-btn.active, .flavor-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* NFT Section */
+        .nft-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(var(--secondary), 0.1), rgba(var(--primary), 0.1));
+        }
+
+        .nft-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .nft-content {
+            flex: 1;
+        }
+
+        .nft-cards {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .nft-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .nft-card {
+            background-color: #2A2A3E;
+        }
+
+        .nft-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nft-image {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .nft-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .nft-desc {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        [data-theme="dark"] .nft-desc {
+            color: #AAA;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        [data-theme="dark"] footer {
+            background-color: #0F0F1A;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #AAA;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--light);
+            z-index: 1000;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(var(--dark), 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(var(--dark), 0.1);
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: var(--radius-sm);
+            background-color: rgba(var(--primary), 0.1);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .quantity-btn:hover {
+            background-color: rgba(var(--primary), 0.2);
+        }
+
+        .cart-item-quantity {
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .remove-item {
+            margin-left: auto;
+            color: var(--danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(var(--dark), 0.1);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--radius-lg);
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .ar-container, .generator-container, .nft-container {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 100%;
+                position: relative;
+                transform: none;
+                top: auto;
+                right: auto;
+                margin-top: 30px;
+            }
+
+            .ar-viewer, .generator-preview {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--light);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 20px;
+                box-shadow: var(--shadow-md);
+                transform: translateY(-150%);
+                transition: var(--transition);
+            }
+
+            [data-theme="dark"] .nav-links {
+                background-color: #2A2A3E;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nft-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Pulsing animation for CTA */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(var(--primary), 0.3);
+            border-radius: var(--radius-full);
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(var(--primary), 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: var(--radius-full);
+        }
+
+        /* Accessibility focus styles */
+        a:focus, button:focus, input:focus, textarea:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to Content</a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="uploads/images/products/ikirahah1.jpg" alt="IKIRAHA Logo">
+                <span>IKIRAHA</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#features">Features</a>
+                <a href="#generator">IKIRAHA Generator</a>
+                <a href="#nft">NFT Rewards</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="cart-btn" aria-label="Open cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">IKIRAHA Delivered to Your Door</h1>
+                    <p class="hero-subtitle">Experience the revolution of IKIRAHA e-commerce with our cutting-edge technology and irresistible flavors.</p>
+                    <div class="hero-btns">
+                        <button class="btn btn-primary pulse">
+                            <i class="fas fa-bolt"></i> Order Now
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-play"></i> Watch Demo
+                        </button>
+                    </div>
+                </div>
+                <img src="uploads/images/products/Ikiraha8.jpg" alt="Delicious IKIRAHA" class="hero-image fade-in delay-1">
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <div class="container">
+                <h2 class="section-title fade-in">Why IKIRAHA Stands Out</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="feature-title">Lightning Fast Delivery</h3>
+                        <p>Our drone network delivers your IKIRAHA in under 15 minutes or it's free.</p>
+                    </div>
+                    <div class="feature-card fade-in delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <h3 class="feature-title">AR Preview</h3>
+                        <p>See your IKIRAHA in augmented reality before you buy with our IKIRAHAVision™ tech.</p>
+                    </div>
+                    <div class="feature-card fade-in delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="feature-title">AI Sommelier</h3>
+                        <p>Our AI recommends the perfect drink pairing for your chosen IKIRAHA flavor.</p>
+                    </div>
+                    <div class="feature-card fade-in delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="feature-title">NFT Rewards</h3>
+                        <p>Earn exclusive NFT collectibles with every purchase in our blockchain program.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="section" id="products">
+            <div class="container">
+                <h2 class="section-title fade-in">Our Signature IKIRAHA</h2>
+                <div class="products-filter fade-in">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="classic">Classic</button>
+                    <button class="filter-btn" data-filter="spicy">Spicy</button>
+                    <button class="filter-btn" data-filter="premium">Premium</button>
+                    <button class="filter-btn" data-filter="vegan">Vegan</button>
+                </div>
+                <div class="products-grid">
+                    <!-- Product cards will be dynamically generated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AR Preview Section -->
+        <section class="section ar-section" id="ar-preview">
+            <div class="container ar-container">
+                <div class="ar-content fade-in">
+                    <h2 class="ar-title">Try Before You Buy with AR IKIRAHA Preview</h2>
+                    <p class="ar-desc">Our revolutionary augmented reality technology lets you visualize your IKIRAHA in your actual environment before ordering. See how it looks on your plate, check the size, and even take a virtual bite!</p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-mobile-alt"></i> Launch AR Viewer
+                    </button>
+                </div>
+                <div class="ar-viewer fade-in delay-1">
+                    <div class="ar-placeholder">
+                        <i class="fas fa-vr-cardboard ar-icon"></i>
+                        <h3>AR IKIRAHA Preview</h3>
+                        <p>Click "Launch AR Viewer" to experience your IKIRAHA in augmented reality</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials">
+            <div class="container">
+                <h2 class="section-title fade-in">What Our Customers Say</h2>
+                <div class="testimonials-slider fade-in">
+                    <div class="testimonial-card">
+                        <img src="uploads/images/users/SuperManager.jpeg" alt="Super Manager" class="testimonial-avatar">
+                        <p class="testimonial-text">"The AR preview blew my mind! I could see exactly how big the IKIRAHA would be before ordering. IKIRAHA has ruined all other food delivery for me."</p>
+                        <p class="testimonial-author">Super Manager</p>
+                        <p class="testimonial-role">Food Critic, Gourmet Magazine</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IKIRAHA Generator Section -->
+        <section class="section generator-section" id="generator">
+            <div class="container generator-container">
+                <div class="generator-controls fade-in">
+                    <h2 class="section-title">Design Your Dream IKIRAHA</h2>
+                    <p>Customize every aspect of your IKIRAHA with our interactive 3D editor.</p>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Crust Thickness</label>
+                        <input type="range" class="control-range" min="1" max="10" value="5">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Spiciness Level</label>
+                        <input type="range" class="control-range" min="1" max="10" value="3">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">Main Flavor</label>
+                        <div class="flavor-btns">
+                            <button class="flavor-btn active">Chicken</button>
+                            <button class="flavor-btn">Beef</button>
+                            <button class="flavor-btn">Potato</button>
+                            <button class="flavor-btn">Cheese</button>
+                            <button class="flavor-btn">Seafood</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Custom IKIRAHA
+                    </button>
+                </div>
+                <div class="generator-preview fade-in delay-1">
+                    <div class="IKIRAHA-3d">
+                        <div class="IKIRAHA-model">
+                            <img src="uploads/images/products/ikirahah1.jpg" alt="3D IKIRAHA Model" style="width:100%;height:100%;object-fit:contain;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NFT Section -->
+        <section class="section nft-section" id="nft">
+            <div class="container nft-container">
+                <div class="nft-content fade-in">
+                    <h2 class="section-title">Earn Exclusive NFT Rewards</h2>
+                    <p>With every purchase, you earn IKIRAHACoins that can be redeemed for limited edition NFT collectibles. These digital assets appreciate in value and give you access to VIP perks.</p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-wallet"></i> Connect Wallet
+                    </button>
+                </div>
+                <div class="nft-cards fade-in delay-1">
+                    <div class="nft-card">
+                        <img src="uploads/images/coins/IKIRAHACoin300.jpg" alt="300 Golden IKIRAHA NFT" class="nft-image">
+                        <h3 class="nft-title">Golden IKIRAHA</h3>
+                        <p class="nft-desc">Rare collectible - Only 100 minted</p>
+                        <button class="btn btn-secondary" style="padding: 5px 10px;font-size:0.8rem;">
+                            <i class="fas fa-coins"></i> 300 IKIRAHACoins
+                        </button>
+                    </div>
+                    <div class="nft-card">
+                        <img src="uploads/images/coins/IKIRAHACoin500h.jpg" alt="500 Golden Spicy Legend NFT" class="nft-image">
+                        <h3 class="nft-title">Spicy Legend</h3>
+                        <p class="nft-desc">Epic collectible - Only 50 minted</p>
+                        <button class="btn btn-secondary" style="padding: 5px 10px;font-size:0.8rem;">
+                            <i class="fas fa-coins"></i> 500 IKIRAHACoins
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <img src="uploads/images/products/ikirahah1.jpg" alt="IKIRAHA Logo">
+                        <span>IKIRAHA</span>
+                    </a>
+                    <p>Revolutionizing IKIRAHA e-commerce with cutting-edge technology and unforgettable flavors since 2025.</p>
+                    <div class="social-links" style="margin-top:20px;">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#">Home</a>
+                        <a href="#">Menu</a>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Help</h3>
+                    <div class="footer-links">
+                        <a href="#">FAQs</a>
+                        <a href="#">Shipping</a>
+                        <a href="#">Returns</a>
+                        <a href="#">Order Status</a>
+                        <a href="#">Payment Options</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Contact</h3>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> 123 IKIRAHA Street, Foodie City</a>
+                        <a href="#"><i class="fas fa-phone"></i> +1 (555) IKIRAHA-NOW</a>
+                        <a href="#"><i class="fas fa-envelope"></i> hello@IKIRAHA.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="copyright-year">2025</span> IKIRAHA. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const startYear = 2025;
+                    const currentYear = new Date().getFullYear();
+                    const yearSpan = document.getElementById('copyright-year');
+                    
+                    // Format the year display
+                    if (startYear === currentYear) {
+                        yearSpan.textContent = startYear;
+                    } else {
+                        yearSpan.textContent = startYear + ' - ' + currentYear;
+                    }
+                    
+                    // Add developer credit (you can position this wherever you prefer)
+                    const developerCredit = document.createElement('p');
+                    developerCredit.textContent = 'Developed by IRUTABYOSE Yoramu';
+                    developerCredit.style.marginTop = '10px';
+                    developerCredit.style.fontSize = '0.9em';
+                    document.querySelector('.footer-bottom').appendChild(developerCredit);
+                });
+            </script>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Your IKIRAHA Cart</h3>
+            <button class="close-cart" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+            <div class="empty-cart-message" style="text-align:center;padding:40px 0;">
+                <i class="fas fa-shopping-cart" style="font-size:3rem;opacity:0.3;margin-bottom:20px;"></i>
+                <p>Your cart is empty</p>
+                <button class="btn btn-primary" style="margin-top:20px;">Browse IKIRAHA</button>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount">Rwf 0</span>
+            </div>
+            <button class="checkout-btn">
+                <i class="fas fa-lock"></i> Secure Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                const icon = themeToggle.querySelector('i');
+                icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Cart Functionality
+            const cartBtn = document.querySelector('.cart-btn');
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const cartSidebar = document.querySelector('.cart-sidebar');
+            const closeCart = document.querySelector('.close-cart');
+            
+            cartBtn.addEventListener('click', openCart);
+            cartOverlay.addEventListener('click', closeCartFunc);
+            closeCart.addEventListener('click', closeCartFunc);
+            
+            function openCart() {
+                cartOverlay.classList.add('active');
+                cartSidebar.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeCartFunc() {
+                cartOverlay.classList.remove('active');
+                cartSidebar.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Product Data
+            const products = [
+                {
+                    id: 1,
+                    name: "Classic Chicken IKIRAHA",
+                    description: "Our signature IKIRAHA with tender chicken, potatoes, and aromatic spices wrapped in flaky pastry.",
+                    price: 200,
+                    image: "uploads/images/products/ikiraha4.jpg",
+                    category: "classic",
+                    rating: 4.8,
+                    spicy: false,
+                    vegan: false
+                },
+                {
+                    id: 2,
+                    name: "Spicy Beef Rendang",
+                    description: "Fiery beef rendang filling with a perfect blend of spices that will tantalize your taste buds.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha5.jpg",
+                    category: "spicy",
+                    rating: 4.9,
+                    spicy: true,
+                    vegan: false
+                },
+                {
+                    id: 3,
+                    name: "Truffle Mushroom Deluxe",
+                    description: "Premium wild mushrooms with black truffle oil in an extra buttery IKIRAHA pastry.",
+                    price: 150,
+                    image: "uploads/images/products/ikiraha6.webp",
+                    category: "premium",
+                    rating: 4.7,
+                    spicy: false,
+                    vegan: true
+                },
+                {
+                    id: 4,
+                    name: "Vegan Jackfruit Curry",
+                    description: "Young jackfruit cooked in rich coconut with spices, 100% plant-based.",
+                    price: 200,
+                    image: "uploads/images/products/ikiraha1.jpg",
+                    category: "vegan",
+                    rating: 4.6,
+                    spicy: false,
+                    vegan: true
+                },
+                {
+                    id: 5,
+                    name: "Cheese & Onion",
+                    description: "Creamy cheese and caramelized onions in a perfectly crisp pastry shell.",
+                    price: 200,
+                    image: "uploads/images/products/ikiraha3.jpeg",
+                    category: "classic",
+                    rating: 4.5,
+                    spicy: false,
+                    vegan: false
+                },
+                {
+                    id: 6,
+                    name: "Dragon Fire Chicken",
+                    description: "Super spicy chicken with ghost pepper and habanero for heat seekers.",
+                    price: 250,
+                    image: "uploads/images/products/ikiraha12.jpg",
+                    category: "spicy",
+                    rating: 4.9,
+                    spicy: true,
+                    vegan: false
+                },
+                {
+                    id: 7,
+                    name: "Lobster Thermidor",
+                    description: "Luxury lobster in creamy thermidor sauce with a touch of cognac.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha7.jpg",
+                    category: "premium",
+                    rating: 5.0,
+                    spicy: false,
+                    vegan: false
+                },
+                {
+                    id: 8,
+                    name: "Spicy Vegan Lentil",
+                    description: "Protein-packed lentils with chili and spices in a golden vegan pastry.",
+                    price: 250,
+                    image: "uploads/images/products/ikiraha11.jpg",
+                    category: "vegan",
+                    rating: 4.7,
+                    spicy: true,
+                    vegan: true
+                },
+                {
+                    id: 9,
+                    name: "Spicy Vegan Lentil",
+                    description: "Protein-packed lentils with chili and spices in a golden vegan pastry.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha9.jpg",
+                    category: "vegan",
+                    rating: 4.7,
+                    spicy: true,
+                    vegan: true
+                },
+                {
+                    id: 10,
+                    name: "Spicy Vegan Lentil",
+                    description: "Protein-packed lentils with chili and spices in a golden vegan pastry.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha8.jpg",
+                    category: "vegan",
+                    rating: 4.7,
+                    spicy: true,
+                    vegan: true
+                },
+                {
+                    id: 11,
+                    name: "Spicy Vegan Lentil",
+                    description: "Protein-packed lentils with chili and spices in a golden vegan pastry.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha10.jpg",
+                    category: "vegan",
+                    rating: 4.7,
+                    spicy: true,
+                    vegan: true
+                },
+                {
+                    id: 12,
+                    name: "Spicy Vegan Lentil",
+                    description: "Protein-packed lentils with chili and spices in a golden vegan pastry.",
+                    price: 300,
+                    image: "uploads/images/products/ikiraha2.jpg",
+                    category: "vegan",
+                    rating: 4.7,
+                    spicy: true,
+                    vegan: true
+                }
+            ];
+            
+            // Render Products
+            const productsGrid = document.querySelector('.products-grid');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            function renderProducts(filter = 'all') {
+                productsGrid.innerHTML = '';
+                
+                const filteredProducts = filter === 'all' ? 
+                    products : 
+                    products.filter(product => product.category === filter);
+                
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card fade-in';
+                    productCard.innerHTML = `
+                        ${product.rating >= 4.8 ? '<span class="product-badge">Bestseller</span>' : ''}
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-content">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-desc">${product.description}</p>
+                            <div class="product-footer">
+                                <span class="product-price">Rwf ${product.price.toFixed(2)}</span>
+                                <button class="add-to-cart" data-id="${product.id}">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    productsGrid.appendChild(productCard);
+                });
+                
+                // Add event listeners to add-to-cart buttons
+                document.querySelectorAll('.add-to-cart').forEach(btn => {
+                    btn.addEventListener('click', addToCart);
+                });
+            }
+            
+            // Initial render
+            renderProducts();
+            
+            // Filter products
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderProducts(btn.dataset.filter);
+                });
+            });
+            
+            // Cart Logic
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            function addToCart(e) {
+                const productId = parseInt(e.currentTarget.dataset.id);
+                const product = products.find(p => p.id === productId);
+                
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `${product.name} added to cart`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+                });
+            }
+            
+            function updateCart() {
+                // Save to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Update cart count
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                document.querySelector('.cart-count').textContent = totalItems;
+                
+                // Update cart sidebar
+                const cartItemsContainer = document.querySelector('.cart-items');
+                const emptyCartMessage = document.querySelector('.empty-cart-message');
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = `
+                        <div class="empty-cart-message" style="text-align:center;padding:40px 0;">
+                            <i class="fas fa-shopping-cart" style="font-size:3rem;opacity:0.3;margin-bottom:20px;"></i>
+                            <p>Your cart is empty</p>
+                            <button class="btn btn-primary" style="margin-top:20px;">Browse IKIRAHA</button>
+                        </div>
+                    `;
+                } else {
+                    cartItemsContainer.innerHTML = '';
+                    cart.forEach(item => {
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'cart-item';
+                        cartItem.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                            <div class="cart-item-details">
+                                <h4 class="cart-item-title">${item.name}</h4>
+                                <p class="cart-item-price">Rwf ${(item.price * item.quantity).toFixed(2)}</p>
+                                <div class="cart-item-actions">
+                                    <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                    <span class="cart-item-quantity">${item.quantity}</span>
+                                    <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                    <button class="remove-item" data-id="${item.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(cartItem);
+                    });
+                    
+                    // Add event listeners to quantity buttons
+                    document.querySelectorAll('.quantity-btn').forEach(btn => {
+                        btn.addEventListener('click', updateQuantity);
+                    });
+                    
+                    document.querySelectorAll('.remove-item').forEach(btn => {
+                        btn.addEventListener('click', removeItem);
+                    });
+                }
+                
+                // Update total
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.querySelector('.cart-total-amount').textContent = `$${total.toFixed(2)}`;
+            }
+            
+            function updateQuantity(e) {
+                const productId = parseInt(e.currentTarget.dataset.id);
+                const item = cart.find(item => item.id === productId);
+                
+                if (e.currentTarget.classList.contains('minus')) {
+                    item.quantity = Math.max(1, item.quantity - 1);
+                } else if (e.currentTarget.classList.contains('plus')) {
+                    item.quantity += 1;
+                }
+                
+                updateCart();
+            }
+            
+            function removeItem(e) {
+                const productId = parseInt(e.currentTarget.dataset.id);
+                cart = cart.filter(item => item.id !== productId);
+                updateCart();
+                
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Item removed from cart',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+                });
+            }
+            
+            // Initialize cart
+            updateCart();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // IKIRAHA Generator Interactions
+            const crustSlider = document.querySelector('.generator-controls input[type="range"]:nth-of-type(1)');
+            const spiceSlider = document.querySelector('.generator-controls input[type="range"]:nth-of-type(2)');
+            const flavorBtns = document.querySelectorAll('.flavor-btn');
+            
+            flavorBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    flavorBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    // In a real implementation, this would update the 3D model
+                });
+            });
+            
+            crustSlider.addEventListener('input', () => {
+                // Update 3D model crust thickness
+            });
+            
+            spiceSlider.addEventListener('input', () => {
+                // Update 3D model spiciness visual
+            });
+            
+            // AR Preview Button
+            const arBtn = document.querySelector('.ar-content .btn-primary');
+            arBtn.addEventListener('click', () => {
+                Swal.fire({
+                    title: 'AR IKIRAHA Preview',
+                    html: 'Launching our augmented reality viewer...<div class="spinner" style="margin:20px auto;"></div>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
+                
+                // Simulate AR loading
+                setTimeout(() => {
+                    Swal.fire({
+                        title: 'Point Your Camera',
+                        text: 'Aim your phone camera at a flat surface to place your virtual IKIRAHA',
+                        imageUrl: 'https://via.placeholder.com/300x200?text=AR+Preview',
+                        imageAlt: 'AR Preview',
+                        showCancelButton: true,
+                        confirmButtonText: 'Got It!',
+                        cancelButtonText: 'Maybe Later'
+                    });
+                }, 2000);
+            });
+            
+            // NFT Connect Wallet Button
+            const connectWalletBtn = document.querySelector('.nft-content .btn-primary');
+            connectWalletBtn.addEventListener('click', () => {
+                Swal.fire({
+                    title: 'Connect Wallet',
+                    html: `
+                        <p>Connect your crypto wallet to start earning IKIRAHACoin rewards:</p>
+                        <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
+                            <button style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #ddd;border-radius:8px;background:white;cursor:pointer;">
+                                <img src="https://via.placeholder.com/30x30?text=M" width="30" height="30" style="border-radius:50%;">
+                                <span>MetaMask</span>
+                            </button>
+                            <button style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #ddd;border-radius:8px;background:white;cursor:pointer;">
+                                <img src="https://via.placeholder.com/30x30?text=W" width="30" height="30" style="border-radius:50%;">
+                                <span>WalletConnect</span>
+                            </button>
+                            <button style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #ddd;border-radius:8px;background:white;cursor:pointer;">
+                                <img src="https://via.placeholder.com/30x30?text=C" width="30" height="30" style="border-radius:50%;">
+                                <span>Coinbase Wallet</span>
+                            </button>
+                        </div>
+                    `,
+                    showConfirmButton: false,
+                    showCloseButton: true
+                });
+            });
+            
+            // Checkout Button
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Your cart is empty',
+                        text: 'Add some delicious IKIRAHA before checking out!',
+                        confirmButtonText: 'Browse IKIRAHA'
+                    });
+                    return;
+                }
+                
+                Swal.fire({
+                    title: 'Select Delivery Method',
+                    html: `
+                        <div style="display:flex;flex-direction:column;gap:15px;margin-top:20px;">
+                            <button class="delivery-option" style="padding:15px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;text-align:left;">
+                                <h3 style="margin-bottom:5px;">Standard Delivery</h3>
+                                <p style="font-size:0.9em;color:#666;">30-45 minutes • $2.99</p>
+                            </button>
+                            <button class="delivery-option" style="padding:15px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;text-align:left;">
+                                <h3 style="margin-bottom:5px;">Express Drone</h3>
+                                <p style="font-size:0.9em;color:#666;">Under 15 minutes • $5.99</p>
+                            </button>
+                            <button class="delivery-option" style="padding:15px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;text-align:left;">
+                                <h3 style="margin-bottom:5px;">Pickup</h3>
+                                <p style="font-size:0.9em;color:#666;">Ready in 10 minutes • Free</p>
+                            </button>
+                        </div>
+                    `,
+                    showConfirmButton: false,
+                    showCloseButton: true
+                });
+                
+                // Add event listeners to delivery options
+                setTimeout(() => {
+                    document.querySelectorAll('.delivery-option').forEach(option => {
+                        option.addEventListener('click', () => {
+                            proceedToPayment();
+                        });
+                    });
+                }, 100);
+            });
+            
+            function proceedToPayment() {
+                Swal.fire({
+                    title: 'Secure Checkout',
+                    html: `
+                        <div style="text-align:left;margin-bottom:20px;">
+                            <h3 style="margin-bottom:10px;font-size:1.1em;">Order Summary</h3>
+                            ${cart.map(item => `
+                                <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                                    <span>${item.name} × ${item.quantity}</span>
+                                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                </div>
+                            `).join('')}
+                            <div style="border-top:1px solid #eee;margin:10px 0;padding-top:10px;display:flex;justify-content:space-between;font-weight:bold;">
+                                <span>Total</span>
+                                <span>$${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px;">
+                            <h3 style="margin-bottom:10px;font-size:1.1em;">Payment Method</h3>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <button class="payment-method" style="padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;">
+                                    <i class="fab fa-cc-visa" style="font-size:1.5em;"></i>
+                                </button>
+                                <button class="payment-method" style="padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;">
+                                    <i class="fab fa-cc-mastercard" style="font-size:1.5em;"></i>
+                                </button>
+                                <button class="payment-method" style="padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;">
+                                    <i class="fab fa-cc-amex" style="font-size:1.5em;"></i>
+                                </button>
+                                <button class="payment-method" style="padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;">
+                                    <i class="fab fa-cc-paypal" style="font-size:1.5em;"></i>
+                                </button>
+                                <button class="payment-method" style="padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;">
+                                    <i class="fab fa-bitcoin" style="font-size:1.5em;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Pay Now',
+                    cancelButtonText: 'Back',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return new Promise((resolve) => {
+                            setTimeout(() => {
+                                resolve();
+                            }, 2000);
+                        });
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Order Placed!',
+                            html: `
+                                <p>Your IKIRAHA are on their way!</p>
+                                <div style="margin-top:20px;background:#f8f9fa;padding:15px;border-radius:8px;">
+                                    <h4 style="margin-bottom:10px;">Order #${Math.floor(100000 + Math.random() * 900000)}</h4>
+                                    <p>Estimated delivery: <strong>${new Date(Date.now() + 30*60000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</strong></p>
+                                    <button id="track-IKIRAHA" style="margin-top:15px;padding:8px 15px;background:var(--primary);color:white;border:none;border-radius:4px;cursor:pointer;">
+                                        Track My IKIRAHA
+                                    </button>
+                                </div>
+                            `,
+                            confirmButtonText: 'Awesome!'
+                        }).then(() => {
+                            // Clear cart after successful order
+                            cart = [];
+                            updateCart();
+                        });
+                        
+                        // Add event listener to track IKIRAHA button
+                        setTimeout(() => {
+                            document.getElementById('track-IKIRAHA')?.addEventListener('click', () => {
+                                Swal.fire({
+                                    title: 'IKIRAHA Tracker™',
+                                    html: `
+                                        <div style="margin:20px 0;">
+                                            <div style="height:200px;background:url('https://via.placeholder.com/400x200?text=Live+Drone+Tracking') center/cover;border-radius:8px;position:relative;">
+                                                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:5px 10px;border-radius:20px;box-shadow:0 2px 5px rgba(0,0,0,0.2);">
+                                                    <i class="fas fa-drone" style="color:var(--primary);"></i> Drone #IKIRAHA-${Math.floor(10 + Math.random() * 90)}
+                                                </div>
+                                            </div>
+                                            <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center;">
+                                                <div>
+                                                    <div style="font-weight:bold;">Delivery Progress</div>
+                                                    <div style="font-size:0.9em;color:#666;">Estimated arrival: 8 minutes</div>
+                                                </div>
+                                                <div style="width:100px;height:100px;">
+                                                    <svg viewBox="0 0 36 36" style="display: block; transform: rotate(-90deg);">
+                                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="3" stroke-dasharray="100, 100"></path>
+                                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="65, 100" stroke-linecap="round"></path>
+                                                        <text x="18" y="20.5" text-anchor="middle" fill="var(--primary)" font-size="8" font-weight="bold" transform="rotate(90 18 18)">65%</text>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `,
+                                    showConfirmButton: false,
+                                    showCloseButton: true
+                                });
+                            });
+                        }, 100);
+                    }
+                });
+            }
+            
+            // AI Sommelier Demo
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const productId = parseInt(card.querySelector('.add-to-cart').dataset.id);
+                    const product = products.find(p => p.id === productId);
+                    
+                    // In a real implementation, this would call an AI API for pairing recommendations
+                    const pairings = {
+                        "Classic Chicken IKIRAHA": "Iced Lemongrass Tea",
+                        "Spicy Beef Rendang": "Mango Lassi",
+                        "Truffle Mushroom Deluxe": "Pinot Noir",
+                        "Vegan Jackfruit Curry": "Coconut Water",
+                        "Cheese & Onion": "Sparkling Apple Cider",
+                        "Dragon Fire Chicken": "Cold Milk",
+                        "Lobster Thermidor": "Champagne",
+                        "Spicy Vegan Lentil": "Masala Chai"
+                    };
+                    
+                    const pairing = pairings[product.name] || "House Special Iced Tea";
+                    
+                    card.setAttribute('data-tooltip', `AI Pairing: ${pairing}`);
+                    
+                    // Show tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'ai-tooltip';
+                    tooltip.textContent = `AI Sommelier recommends: ${pairing}`;
+                    card.appendChild(tooltip);
+                    
+                    // Position tooltip
+                    const rect = card.getBoundingClientRect();
+                    tooltip.style.left = `${rect.left + window.scrollX}px`;
+                    tooltip.style.top = `${rect.top + window.scrollY - 40}px`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const tooltip = card.querySelector('.ai-tooltip');
+                    if (tooltip) {
+                        tooltip.remove();
+                    }
+                });
+            });
+            
+            // Add some styles for the AI tooltip
+            const style = document.createElement('style');
+            style.textContent = `
+                .ai-tooltip {
+                    position: absolute;
+                    background: var(--dark);
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: var(--radius-sm);
+                    font-size: 0.8rem;
+                    z-index: 100;
+                    pointer-events: none;
+                    box-shadow: var(--shadow-md);
+                    white-space: nowrap;
+                }
+                
+                .ai-tooltip::after {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: var(--dark) transparent transparent transparent;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Social Sharing
+            const socialShareBtns = document.querySelectorAll('.social-link');
+            socialShareBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const platform = btn.querySelector('i').className.split('fa-')[1].split(' ')[0];
+                    
+                    let shareUrl = '';
+                    let message = '';
+                    
+                    switch(platform) {
+                        case 'facebook-f':
+                            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+                            message = 'Shared on Facebook';
+                            break;
+                        case 'twitter':
+                            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out these amazing IKIRAHA from IKIRAHA!')}&url=${encodeURIComponent(window.location.href)}`;
+                            message = 'Shared on Twitter';
+                            break;
+                        case 'instagram':
+                            // Instagram doesn't have a direct share URL
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Share on Instagram',
+                                text: 'Take a screenshot and share it on your Instagram story!',
+                                confirmButtonText: 'OK'
+                            });
+                            return;
+                        case 'tiktok':
+                            shareUrl = 'https://www.tiktok.com/';
+                            message = 'Opened TikTok';
+                            break;
+                        default:
+                            return;
+                    }
+                    
+                    if (shareUrl) {
+                        window.open(shareUrl, '_blank');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+                        });
+                    }
+                });
+            });
+            
+            // Voice Search Demo
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === ' ') {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Voice Search',
+                        html: `
+                            <div style="text-align:center;margin:20px 0;">
+                                <i class="fas fa-microphone" style="font-size:3rem;color:var(--primary);"></i>
+                                <p style="margin-top:20px;">Speak now to search for IKIRAHA...</p>
+                                <div class="voice-visualizer" style="display:flex;gap:3px;justify-content:center;margin-top:20px;height:30px;align-items:flex-end;">
+                                    <div style="width:4px;background:var(--primary);height:5px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:10px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:15px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:20px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:25px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:20px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:15px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:10px;border-radius:2px;"></div>
+                                    <div style="width:4px;background:var(--primary);height:5px;border-radius:2px;"></div>
+                                </div>
+                            </div>
+                        `,
+                        showConfirmButton: false,
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancel'
+                    });
+                    
+                    // Simulate voice recognition
+                    setTimeout(() => {
+                        const queries = [
+                            "spicy beef IKIRAHA",
+                            "vegan options",
+                            "best selling IKIRAHA",
+                            "truffle mushroom deluxe"
+                        ];
+                        const randomQuery = queries[Math.floor(Math.random() * queries.length)];
+                        
+                        Swal.fire({
+                            title: 'Voice Search Results',
+                            text: `Showing results for "${randomQuery}"`,
+                            confirmButtonText: 'Search'
+                        }).then(() => {
+                            // Filter products based on voice query
+                            const filtered = products.filter(product => 
+                                product.name.toLowerCase().includes(randomQuery.split(' ')[0]) || 
+                                product.description.toLowerCase().includes(randomQuery)
+                            );
+                            
+                            if (filtered.length > 0) {
+                                renderProducts();
+                                // Highlight matching products
+                                document.querySelectorAll('.product-card').forEach(card => {
+                                    const productId = parseInt(card.querySelector('.add-to-cart').dataset.id);
+                                    if (filtered.some(p => p.id === productId)) {
+                                        card.style.boxShadow = '0 0 0 3px var(--primary)';
+                                        setTimeout(() => {
+                                            card.style.boxShadow = '';
+                                        }, 3000);
+                                    }
+                                });
+                                
+                                // Scroll to products
+                                document.getElementById('products').scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: 'No results found',
+                                    text: `We couldn't find any products matching "${randomQuery}"`
+                                });
+                            }
+                        });
+                    }, 2000);
+                }
+            });
+            
+            // PWA Installation Prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                
+                // Show install prompt after 30 seconds
+                setTimeout(() => {
+                    Swal.fire({
+                        title: 'Install IKIRAHA App',
+                        text: 'Get the best IKIRAHA experience with our app! Enjoy faster loading, offline access, and push notifications.',
+                        imageUrl: 'https://via.placeholder.com/100x100?text=IKIRAHA',
+                        imageWidth: 100,
+                        imageAlt: 'IKIRAHA App',
+                        showCancelButton: true,
+                        confirmButtonText: 'Install',
+                        cancelButtonText: 'Not Now',
+                        footer: 'Available on all devices'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            e.prompt();
+                            e.userChoice.then((choiceResult) => {
+                                if (choiceResult.outcome === 'accepted') {
+                                    Swal.fire({
+                                        title: 'App Installing',
+                                        text: 'IKIRAHA will be ready shortly!',
+                                        icon: 'success'
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }, 30000);
+            });
+        });
+    </script>
+</body>
+</html>

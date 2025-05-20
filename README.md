@@ -99,13 +99,13 @@ We welcome contributions! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📜 License
+## 📜 License  
 
-Distributed under the MIT License. See `LICENSE` for more information.
+📄 **Distributed under the MIT License.** See [`LICENSE`](LICENSE) for more information.  
 
 ## 📧 Contact  
 
-- **👔 Project Lead LinkedIn:** [Iyoramu](https://www.linkedin.com/in/iyoramu)  
+- **👔 Project Lead LinkedIn:** [iyoramu](https://www.linkedin.com/in/iyoramu)  
 - **📧 Project Lead Email:** [yirutabyose@gmail.com](mailto:yirutabyose@gmail.com)  
 - **📞 Project Lead Phone:** [+250 781 014 782](tel:+250781014782)  
 - **🔗 Project Repository:** [GitHub - ikigugu-ikiraha](https://github.com/iyoramu/ikigugu-ikiraha-yoramuirutabyose)  

@@ -67,7 +67,7 @@ ikiraha/
 
 ## 🎥 Demo Video
 
-[![IKIRAHA Demo](https://www.google.com/imgres?q=curry%20beef%20puff%20youtube&imgurl=https%3A%2F%2Fs3.us-east-2.amazonaws.com%2Fpfimg1%2F011%2F4d%2Fc1%2F4dc1f6f752fdc4f20a7fad57c0dfc6ba_1280m.jpg&imgrefurl=https%3A%2F%2Fwww.punchfork.com%2Frecipe%2FBeef-Curry-Puffs-The-Spruce-Eats&docid=6jf1TafgvLwFJM&tbnid=-9swPLV5Uu0tcM&vet=12ahUKEwijpNem-LKNAxW7KvsDHePbPFwQM3oECDYQAA..i&w=1280&h=852&hcb=2&ved=2ahUKEwijpNem-LKNAxW7KvsDHePbPFwQM3oECDYQAA)](https://www.instagram.com/p/DJ1yw2DNSBh)
+[![IKIRAHA Demo](https://www.punchfork.com/recipe/Beef-Curry-Puffs-The-Spruce-Eats)](https://www.instagram.com/p/DJ1yw2DNSBh)
 
 ## 📈 Lighthouse Scores
 

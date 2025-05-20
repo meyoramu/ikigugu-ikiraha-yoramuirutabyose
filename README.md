@@ -67,7 +67,7 @@ ikiraha/
 
 ## 🎥 Demo Video
 
-[![IKIRAHA Demo](https://www.punchfork.com/recipe/Beef-Curry-Puffs-The-Spruce-Eats)](https://www.instagram.com/p/DJ1yw2DNSBh)
+[![IKIRAHA Demo]](https://www.instagram.com/p/DJ1yw2DNSBh)
 
 ## 📈 Lighthouse Scores
 

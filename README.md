@@ -59,7 +59,7 @@ ikiraha/
    cd ikigugu-ikiraha-yoramuirutabyose
    ```
 
-2. **Open in browser**
+2. **Open in phone**
    - Simply open `App` in any modern browser
 
 3. **Deploy to IKIGUGU GROUP LTD**

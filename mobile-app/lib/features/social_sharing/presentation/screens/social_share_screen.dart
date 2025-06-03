@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:video_player/video_player.dart';
+import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
 class SocialShareScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
   bool _isRecording = false;
   VideoPlayerController? _videoController;
   String? _errorMessage;
+  XFile? _lastRecordedVideo;
+  bool _isSharing = false;
 
   @override
   void initState() {
@@ -58,6 +61,7 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
       if (_isRecording) {
         final file = await _cameraController!.stopVideoRecording();
         setState(() => _isRecording = false);
+        _lastRecordedVideo = file;
         await _initializeVideoPlayer(file);
       } else {
         await _initializeControllerFuture;
@@ -66,6 +70,7 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
           _isRecording = true;
           _videoController?.dispose();
           _videoController = null;
+          _lastRecordedVideo = null;
         });
         
         // Stop after 15 seconds
@@ -73,12 +78,56 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
           if (_isRecording && mounted) {
             final file = await _cameraController!.stopVideoRecording();
             setState(() => _isRecording = false);
+            _lastRecordedVideo = file;
             await _initializeVideoPlayer(file);
           }
         });
       }
     } catch (e) {
       setState(() => _errorMessage = 'Error recording video: $e');
+    }
+  }
+
+  Future<void> _shareVideo() async {
+    if (_lastRecordedVideo == null) {
+      setState(() => _errorMessage = 'No video available to share');
+      return;
+    }
+
+    try {
+      setState(() => _isSharing = true);
+
+      final file = File(_lastRecordedVideo!.path);
+      if (!await file.exists()) {
+        throw Exception('Video file not found');
+      }
+
+      final result = await Share.shareXFiles(
+        [XFile(file.path)],
+        text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
+        subject: 'My Curry Puff Creation',
+      );
+
+      if (mounted) {
+        setState(() => _isSharing = false);
+        
+        if (result.status == ShareResultStatus.success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Video shared successfully!')),
+          );
+        } else if (result.status == ShareResultStatus.dismissed) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Sharing cancelled')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isSharing = false;
+          _errorMessage = 'Error sharing video: $e';
+        });
+      }
     }
   }
 
@@ -104,12 +153,23 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
       appBar: AppBar(
         title: const Text('Share Your Puff'),
         actions: [
-          if (_videoController != null)
+          if (_videoController != null && !_isSharing)
             IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () {
-                // TODO: Implement sharing functionality
-              },
+              onPressed: _shareVideo,
+              tooltip: 'Share your puff video',
+            ),
+          if (_isSharing)
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
             ),
         ],
       ),
@@ -142,9 +202,38 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
           : Stack(
               children: [
                 if (_videoController != null && _videoController!.value.isInitialized)
-                  AspectRatio(
-                    aspectRatio: _videoController!.value.aspectRatio,
-                    child: VideoPlayer(_videoController!),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (_videoController!.value.isPlaying) {
+                          _videoController!.pause();
+                        } else {
+                          _videoController!.play();
+                        }
+                      });
+                    },
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: _videoController!.value.aspectRatio,
+                          child: VideoPlayer(_videoController!),
+                        ),
+                        if (!_videoController!.value.isPlaying)
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: const Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                      ],
+                    ),
                   )
                 else if (_cameraController != null)
                   FutureBuilder<void>(
@@ -159,22 +248,23 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
                   )
                 else
                   const Center(child: CircularProgressIndicator()),
-                Positioned(
-                  bottom: 32,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: FloatingActionButton(
-                      onPressed: _toggleRecording,
-                      backgroundColor: _isRecording ? Colors.red : Colors.white,
-                      child: Icon(
-                        _isRecording ? Icons.stop : Icons.circle,
-                        color: _isRecording ? Colors.white : Colors.red,
-                        size: 32,
+                if (!_isSharing)
+                  Positioned(
+                    bottom: 32,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: FloatingActionButton(
+                        onPressed: _toggleRecording,
+                        backgroundColor: _isRecording ? Colors.red : Colors.white,
+                        child: Icon(
+                          _isRecording ? Icons.stop : Icons.circle,
+                          color: _isRecording ? Colors.white : Colors.red,
+                          size: 32,
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
     );

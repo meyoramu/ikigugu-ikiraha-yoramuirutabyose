@@ -1,8 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- AR permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
     <application
         android:label="curry_puff_master"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- AR metadata -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"

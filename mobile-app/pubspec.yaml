@@ -45,6 +45,7 @@ dependencies:
   tflite_flutter: ^0.11.0
   camera: ^0.11.1
   video_player: ^2.10.0
+  share_plus: ^11.0.0
 
 dev_dependencies:
   flutter_test:

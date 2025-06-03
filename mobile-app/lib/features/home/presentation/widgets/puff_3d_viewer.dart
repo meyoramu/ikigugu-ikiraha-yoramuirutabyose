@@ -1,9 +1,9 @@
 // features/home/presentation/widgets/puff_3d_viewer.dart
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 
 class Puff3DViewer extends StatefulWidget {
-  final RiveAnimationController controller;
+  final rive.RiveAnimationController controller;
 
   const Puff3DViewer({super.key, required this.controller});
 
@@ -12,12 +12,12 @@ class Puff3DViewer extends StatefulWidget {
 }
 
 class _Puff3DViewerState extends State<Puff3DViewer> {
-  late RiveAnimationController _scaleController;
+  late rive.RiveAnimationController _scaleController;
 
   @override
   void initState() {
     super.initState();
-    _scaleController = OneShotAnimation('scale');
+    _scaleController = rive.OneShotAnimation('scale');
   }
 
   @override
@@ -27,7 +27,7 @@ class _Puff3DViewerState extends State<Puff3DViewer> {
       onScaleUpdate: (details) {
         // Handle scaling and rotation
       },
-      child: RiveAnimation.asset(
+      child: rive.RiveAnimation.asset(
         'assets/animations/puff_3d.riv',
         controllers: [widget.controller, _scaleController],
         fit: BoxFit.contain,

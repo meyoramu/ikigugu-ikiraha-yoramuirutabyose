@@ -1,6 +1,6 @@
 // features/home/presentation/widgets/puff_3d_viewer.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_rive/flutter_rive.dart';
+import 'package:rive/rive.dart';
 
 class Puff3DViewer extends StatefulWidget {
   final RiveAnimationController controller;
@@ -17,7 +17,7 @@ class _Puff3DViewerState extends State<Puff3DViewer> {
   @override
   void initState() {
     super.initState();
-    _scaleController = SimpleAnimation('scale');
+    _scaleController = OneShotAnimation('scale');
   }
 
   @override

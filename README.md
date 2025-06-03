@@ -109,7 +109,7 @@ We welcome contributions! Please follow these steps:
 ## 📧 Contact  
 
 - **👔 Project Lead LinkedIn:** [iyoramu](https://www.linkedin.com/in/iyoramu)  
-- **📧 Project Lead Email:** [yirutabyose@gmail.com](mailto:yirutabyose@gmail.com)  
+- **📧 Project Lead Email:** [meyoramu@gmail.com](mailto:meyoramu@gmail.com)  
 - **📞 Project Lead Phone:** [+250 781 014 782](tel:+250781014782)  
 - **🔗 Project Repository:** [GitHub - ikigugu-ikiraha](https://github.com/iyoramu/ikigugu-ikiraha-yoramuirutabyose)  
 

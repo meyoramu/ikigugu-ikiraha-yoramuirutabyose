@@ -55,7 +55,7 @@ ikiraha/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/iyoramu/ikigugu-ikiraha-yoramuirutabyose.git
+   git clone https://github.com/meyoramu/ikigugu-ikiraha-yoramuirutabyose.git
    cd ikigugu-ikiraha-yoramuirutabyose
    ```
 
@@ -111,6 +111,6 @@ We welcome contributions! Please follow these steps:
 - **👔 Project Lead LinkedIn:** [iyoramu](https://www.linkedin.com/in/iyoramu)  
 - **📧 Project Lead Email:** [meyoramu@gmail.com](mailto:meyoramu@gmail.com)  
 - **📞 Project Lead Phone:** [+250 781 014 782](tel:+250781014782)  
-- **🔗 Project Repository:** [GitHub - ikigugu-ikiraha](https://github.com/iyoramu/ikigugu-ikiraha-yoramuirutabyose)  
+- **🔗 Project Repository:** [GitHub - ikigugu-ikiraha](https://github.com/meyoramu/ikigugu-ikiraha-yoramuirutabyose)  
 
 ```

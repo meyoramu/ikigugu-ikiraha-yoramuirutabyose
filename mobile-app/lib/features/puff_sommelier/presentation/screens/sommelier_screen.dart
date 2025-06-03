@@ -12,9 +12,10 @@ class SommelierScreen extends StatefulWidget {
 }
 
 class _SommelierScreenState extends State<SommelierScreen> {
-  late Interpreter _interpreter;
+  Interpreter? _interpreter;
   List<String> recommendations = [];
   bool isLoading = true;
+  String? error;
 
   @override
   void initState() {
@@ -22,31 +23,72 @@ class _SommelierScreenState extends State<SommelierScreen> {
     _loadModel();
   }
 
+  @override
+  void dispose() {
+    _interpreter?.close();
+    super.dispose();
+  }
+
   Future<void> _loadModel() async {
     try {
-      _interpreter = await Interpreter.fromAsset('models/puff_sommelier.tflite');
-      _getRecommendations();
+      _interpreter = await Interpreter.fromAsset('assets/models/puff_sommelier.tflite');
+      await _getRecommendations();
     } catch (e) {
       setState(() {
         isLoading = false;
-        recommendations = ['Could not load recommendations'];
+        error = 'Failed to load AI model: ${e.toString()}';
       });
     }
   }
 
-  void _getRecommendations() {
-    // Mock AI processing
-    Future.delayed(const Duration(seconds: 2), () {
+  Future<void> _getRecommendations() async {
+    try {
+      if (_interpreter == null) {
+        throw Exception('Model not loaded');
+      }
+
+      // Input shape: [1, 1] - just the puff ID
+      final input = [
+        [widget.puffId.toDouble()]
+      ];
+
+      // Output shape: [1, 4] - top 4 drink recommendations
+      final output = List.filled(1 * 4, 0.0).reshape([1, 4]);
+
+      // Run inference
+      _interpreter!.run(input, output);
+
+      // Convert output to drink recommendations
+      // In a real app, you'd have a mapping of indices to drink names
+      final drinkNames = [
+        'Iced Lemon Tea',
+        'Hot Masala Chai',
+        'Cold Brew Coffee',
+        'Sparkling Water with Lime',
+        'Green Tea',
+        'Mango Lassi',
+        'Ginger Beer',
+        'Rose Milk Tea'
+      ];
+
+      // Get top 4 recommendations based on model output
+      final scores = output[0];
+      final recommendations = List.generate(4, (i) {
+        final maxIndex = scores.indexOf(scores.reduce((a, b) => a > b ? a : b));
+        scores[maxIndex] = -1; // Mark as used
+        return drinkNames[maxIndex % drinkNames.length];
+      });
+
       setState(() {
         isLoading = false;
-        recommendations = [
-          'Iced Lemon Tea',
-          'Hot Masala Chai',
-          'Cold Brew Coffee',
-          'Sparkling Water with Lime'
-        ];
+        this.recommendations = recommendations;
       });
-    });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+        error = 'Error getting recommendations: ${e.toString()}';
+      });
+    }
   }
 
   @override
@@ -57,21 +99,50 @@ class _SommelierScreenState extends State<SommelierScreen> {
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: recommendations.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.local_drink),
-                    title: Text(recommendations[index]),
-                    subtitle: Text('Perfect match for your puff #${widget.puffId}'),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
+          : error != null
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                        const SizedBox(height: 16),
+                        Text(
+                          error!,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                              error = null;
+                            });
+                            _loadModel();
+                          },
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: recommendations.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        leading: const Icon(Icons.local_drink),
+                        title: Text(recommendations[index]),
+                        subtitle: Text('Perfect match for your puff #${widget.puffId}'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () {},
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }

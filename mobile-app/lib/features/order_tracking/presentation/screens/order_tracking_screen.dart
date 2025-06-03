@@ -1,6 +1,7 @@
 // features/order_tracking/presentation/screens/order_tracking_screen.dart
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
   final String orderId;
@@ -12,10 +13,10 @@ class OrderTrackingScreen extends StatefulWidget {
 }
 
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
-  late GoogleMapController mapController;
+  final MapController _mapController = MapController();
   final LatLng _center = const LatLng(1.3521, 103.8198); // Singapore coordinates
-  final Set<Marker> _markers = {};
-  final Set<Polyline> _polylines = {};
+  final List<Marker> _markers = [];
+  final List<Polyline> _polylines = [];
   int _currentStep = 1;
 
   @override
@@ -31,39 +32,44 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     const currentLocation = LatLng(1.3200, 103.8100);
 
     setState(() {
-      _markers.add(
-        const Marker(
-          markerId: MarkerId('store'),
-          position: storeLocation,
-          infoWindow: InfoWindow(title: 'Curry Puff Master'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-        ),
-      );
-      
-      _markers.add(
-        const Marker(
-          markerId: MarkerId('delivery'),
-          position: deliveryLocation,
-          infoWindow: InfoWindow(title: 'Your Location'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-        ),
-      );
-      
-      _markers.add(
+      _markers.addAll([
+        // Store marker
         Marker(
-          markerId: const MarkerId('rider'),
-          position: currentLocation,
-          infoWindow: const InfoWindow(title: 'Your Puff!'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          point: storeLocation,
+          width: 80,
+          height: 80,
+          builder: (context) => Tooltip(
+            message: 'Curry Puff Master',
+            child: const Icon(Icons.store, color: Colors.red, size: 30),
+          ),
         ),
-      );
-      
+        // Delivery location marker
+        Marker(
+          point: deliveryLocation,
+          width: 80,
+          height: 80,
+          builder: (context) => Tooltip(
+            message: 'Your Location',
+            child: const Icon(Icons.location_on, color: Colors.blue, size: 30),
+          ),
+        ),
+        // Rider marker
+        Marker(
+          point: currentLocation,
+          width: 80,
+          height: 80,
+          builder: (context) => Tooltip(
+            message: 'Your Puff!',
+            child: const Icon(Icons.delivery_dining, color: Colors.green, size: 30),
+          ),
+        ),
+      ]);
+
       _polylines.add(
-        const Polyline(
-          polylineId: PolylineId('route'),
+        Polyline(
           points: [storeLocation, currentLocation, deliveryLocation],
           color: Colors.blue,
-          width: 5,
+          strokeWidth: 4.0,
         ),
       );
     });
@@ -79,18 +85,22 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
         children: [
           Expanded(
             flex: 2,
-            child: GoogleMap(
-              onMapCreated: (controller) {
-                setState(() {
-                  mapController = controller;
-                });
-              },
-              initialCameraPosition: CameraPosition(
-                target: _center,
+            child: FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                center: _center,
                 zoom: 12.0,
+                maxZoom: 18.0,
+                minZoom: 6.0,
               ),
-              markers: _markers,
-              polylines: _polylines,
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.currypuffmaster.app',
+                ),
+                MarkerLayer(markers: _markers),
+                PolylineLayer(polylines: _polylines),
+              ],
             ),
           ),
           Expanded(

@@ -1,7 +1,7 @@
 // features/home/presentation/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:curry_puff_master/features/home/presentation/widgets/puff_3d_viewer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,12 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late RiveAnimationController _controller;
+  late rive.RiveAnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = OneShotAnimation('bounce', autoplay: true);
+    _controller = rive.OneShotAnimation('bounce', autoplay: true);
   }
 
   @override

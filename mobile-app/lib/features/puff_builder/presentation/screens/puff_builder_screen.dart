@@ -1,6 +1,6 @@
 // features/puff_builder/presentation/screens/puff_builder_screen.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_rive/flutter_rive.dart';
+import 'package:rive/rive.dart' as rive;
 
 class PuffBuilderScreen extends StatefulWidget {
   const PuffBuilderScreen({super.key});
@@ -29,17 +29,17 @@ class _PuffBuilderScreenState extends State<PuffBuilderScreen> {
             child: DragTarget<String>(
               builder: (context, candidateData, rejectedData) {
                 return Center(
-                  child: RiveAnimation.asset(
+                  child: rive.RiveAnimation.asset(
                     'assets/animations/puff_base.riv',
-                    stateMachines: ['State Machine'],
+                    stateMachines: const ['State Machine'],
                     artboard: 'PuffBuilder',
                   ),
                 );
               },
-              onAccept: (data) {
+              onAcceptWithDetails: (details) {
                 setState(() {
-                  if (!selectedIngredients.contains(data)) {
-                    selectedIngredients.add(data);
+                  if (!selectedIngredients.contains(details.data)) {
+                    selectedIngredients.add(details.data);
                   }
                 });
               },
@@ -71,7 +71,7 @@ class _PuffBuilderScreenState extends State<PuffBuilderScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(child: Text(ingredient)),

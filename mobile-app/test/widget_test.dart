@@ -16,11 +16,25 @@ void main() {
     await di.init();
   });
 
-  testWidgets('App title is displayed', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('App initializes with correct theme and title', (WidgetTester tester) async {
+    // Build our app and trigger a frame
     await tester.pumpWidget(const CurryPuffMasterApp());
+    await tester.pumpAndSettle();
 
-    // Verify that the app title is displayed
-    expect(find.text('Curry Puff Master'), findsOneWidget);
+    // Find MaterialApp widget
+    final MaterialApp materialApp = tester.widget<MaterialApp>(
+      find.byType(MaterialApp),
+    );
+
+    // Verify app title
+    expect(materialApp.title, 'Curry Puff Master');
+    expect(find.byType(MaterialApp), findsOneWidget);
+
+    // Verify theme settings
+    expect(materialApp.debugShowCheckedModeBanner, false);
+    expect(materialApp.themeMode, ThemeMode.system);
+
+    // Verify initial route
+    expect(materialApp.initialRoute, '/');
   });
 }

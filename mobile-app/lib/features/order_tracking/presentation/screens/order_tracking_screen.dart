@@ -14,7 +14,7 @@ class OrderTrackingScreen extends StatefulWidget {
 
 class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   final MapController _mapController = MapController();
-  final LatLng _center = const LatLng(1.3521, 103.8198); // Singapore coordinates
+  final LatLng _center = LatLng(1.3521, 103.8198); // Singapore coordinates
   final List<Marker> _markers = [];
   final List<Polyline> _polylines = [];
   int _currentStep = 1;
@@ -27,9 +27,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
 
   void _addMarkersAndPolyline() {
     // Mock locations
-    const storeLocation = LatLng(1.3521, 103.8198);
-    const deliveryLocation = LatLng(1.3000, 103.8000);
-    const currentLocation = LatLng(1.3200, 103.8100);
+    final storeLocation = LatLng(1.3521, 103.8198);
+    final deliveryLocation = LatLng(1.3000, 103.8000);
+    final currentLocation = LatLng(1.3200, 103.8100);
 
     setState(() {
       _markers.addAll([
@@ -38,9 +38,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           point: storeLocation,
           width: 80,
           height: 80,
-          builder: (context) => Tooltip(
+          builder: (context) => const Tooltip(
             message: 'Curry Puff Master',
-            child: const Icon(Icons.store, color: Colors.red, size: 30),
+            child: Icon(Icons.store, color: Colors.red, size: 30),
           ),
         ),
         // Delivery location marker
@@ -48,9 +48,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           point: deliveryLocation,
           width: 80,
           height: 80,
-          builder: (context) => Tooltip(
+          builder: (context) => const Tooltip(
             message: 'Your Location',
-            child: const Icon(Icons.location_on, color: Colors.blue, size: 30),
+            child: Icon(Icons.location_on, color: Colors.blue, size: 30),
           ),
         ),
         // Rider marker
@@ -58,9 +58,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           point: currentLocation,
           width: 80,
           height: 80,
-          builder: (context) => Tooltip(
+          builder: (context) => const Tooltip(
             message: 'Your Puff!',
-            child: const Icon(Icons.delivery_dining, color: Colors.green, size: 30),
+            child: Icon(Icons.delivery_dining, color: Colors.green, size: 30),
           ),
         ),
       ]);

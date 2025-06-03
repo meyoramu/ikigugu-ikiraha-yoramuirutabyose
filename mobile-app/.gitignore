@@ -43,6 +43,41 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Web related
+/web/firebase-config.js
+
+# Windows related
+/windows/flutter/generated_plugin_registrant.cc
+/windows/flutter/generated_plugin_registrant.h
+/windows/flutter/generated_plugins.cmake
+
+# Linux related
+/linux/flutter/generated_plugin_registrant.cc
+/linux/flutter/generated_plugin_registrant.h
+/linux/flutter/generated_plugins.cmake
+
+# macOS related
+/macos/Flutter/GeneratedPluginRegistrant.swift
+/macos/Flutter/ephemeral
+
+# Generated Dart files
+**/*.g.dart
+**/*.freezed.dart
+**/*.mocks.dart
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Firebase related
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
+/ios/firebase_app_id_file.json
+/lib/firebase_options.dart
+
 # iOS/XCode related
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
@@ -68,3 +103,68 @@ app.*.map.json
 **/ios/Flutter/flutter_assets/
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+
+# FVM related
+.fvm/flutter_sdk
+
+# Coverage related
+coverage/
+*.lcov
+
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+
+# iOS/XCode related (additional)
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# VSCode related
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Project specific
+*.env.*
+*.cache/
+*.log.*
+tmp/
+temp/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.gr.dart
+*.config.dart
+*.mocks.dart
+*.chopper.dart
+*.swagger.dart
+*.graphql.dart
+*.pigeon.dart
+
+# Dependency directories
+.packages.generated
+pubspec.lock
+pubspec_overrides.yaml
+
+# IDE related
+*.iml
+*.ipr
+*.iws
+.idea/
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project

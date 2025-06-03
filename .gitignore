@@ -4,8 +4,24 @@
 *.log
 *.pyc
 *.swp
+.DS_Store
+.atom/
 .buildlog/
 .history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+.vscode/
 
 
 
@@ -109,6 +125,32 @@ coverage/
 
 # Symbols
 app.*.symbols
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Firebase related
+**/android/app/google-services.json
+**/ios/Runner/GoogleService-Info.plist
+**/ios/firebase_app_id_file.json
+**/lib/firebase_options.dart
+
+# Web related
+**/web/firebase-config.js
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3

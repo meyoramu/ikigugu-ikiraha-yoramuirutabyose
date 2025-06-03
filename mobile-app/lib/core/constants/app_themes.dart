@@ -13,7 +13,7 @@ class AppThemes {
       elevation: 0,
       scrolledUnderElevation: 4,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -33,7 +33,7 @@ class AppThemes {
       elevation: 0,
       scrolledUnderElevation: 4,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),

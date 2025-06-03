@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:curry_puff_master/core/constants/app_themes.dart';
 import 'package:curry_puff_master/core/utils/route_generator.dart';
 import 'package:curry_puff_master/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:curry_puff_master/core/injection_container.dart' as di;
 
 class CurryPuffMasterApp extends StatelessWidget {
   const CurryPuffMasterApp({super.key});

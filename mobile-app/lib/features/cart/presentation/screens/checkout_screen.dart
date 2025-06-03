@@ -43,18 +43,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       
       if (response.status) {
         // Payment successful
+        if (!mounted) return;
         Navigator.pushNamed(context, '/order-confirmation');
       } else {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Payment failed: ${response.message}')),
         );
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
     } finally {
-      setState(() => isLoading = false);
+      if (mounted) {
+        setState(() => isLoading = false);
+      }
     }
   }
 
@@ -86,9 +91,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Delivery'),
-                        const Text('\$0.00'),
+                      children: const [
+                        Text('Delivery'),
+                        Text('\$0.00'),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -120,8 +125,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
               child: isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text('Pay with Apple Pay/Google Pay'),
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Text('Pay Now'),
             ),
           ],
         ),

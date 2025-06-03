@@ -70,9 +70,11 @@ flutter:
     - assets/
     - assets/logo.svg
     - assets/animations/
+    - assets/images/
     - assets/models/
     - assets/textures/
     - assets/triangle.png
+    - assets/models/puff_sommelier.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

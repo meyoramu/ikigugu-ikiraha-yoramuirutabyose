@@ -2,7 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
+/// An animated logo widget that displays the Ikigugu brand logo using Rive animation.
+/// 
+/// The logo animates on mouse hover, playing an 'idle' animation when the mouse
+/// enters the widget's area and stopping when it exits.
 class AnimatedIkiguguLogo extends StatefulWidget {
+  /// Creates an animated Ikigugu logo widget.
+  /// 
+  /// Uses a Rive animation file located at 'assets/animations/lion_logo.riv'.
   const AnimatedIkiguguLogo({super.key});
 
   @override
@@ -10,7 +17,7 @@ class AnimatedIkiguguLogo extends StatefulWidget {
 }
 
 class _AnimatedIkiguguLogoState extends State<AnimatedIkiguguLogo> {
-  late RiveAnimationController _controller;
+  late RiveAnimationController<RuntimeArtboard> _controller;
 
   @override
   void initState() {

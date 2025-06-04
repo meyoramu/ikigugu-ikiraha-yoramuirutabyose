@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.curry_puff_master"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "25.2.9519653"
+    ndkVersion = "25.1.8937393"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

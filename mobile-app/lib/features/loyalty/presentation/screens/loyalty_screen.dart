@@ -1,7 +1,25 @@
 // features/loyalty/presentation/screens/loyalty_screen.dart
 import 'package:flutter/material.dart';
 
+/// A model class to represent an NFT in the loyalty program
+class LoyaltyNFT {
+  final int id;
+  final String name;
+  final String imagePath;
+  final bool owned;
+
+  const LoyaltyNFT({
+    required this.id,
+    required this.name,
+    required this.imagePath,
+    required this.owned,
+  });
+}
+
+/// Screen that displays the user's loyalty program status and NFT collection.
+/// Shows the current points balance and available/owned NFTs.
 class LoyaltyScreen extends StatefulWidget {
+  /// Creates a loyalty screen widget.
   const LoyaltyScreen({super.key});
 
   @override
@@ -9,12 +27,12 @@ class LoyaltyScreen extends StatefulWidget {
 }
 
 class _LoyaltyScreenState extends State<LoyaltyScreen> {
-  int points = 1250;
-  List<Map<String, dynamic>> nfts = [
-    {'id': 1, 'name': 'Golden Puff', 'image': 'assets/nfts/golden.png', 'owned': true},
-    {'id': 2, 'name': 'Spicy Legend', 'image': 'assets/nfts/spicy.png', 'owned': false},
-    {'id': 3, 'name': 'Cheese Master', 'image': 'assets/nfts/cheese.png', 'owned': true},
-    {'id': 4, 'name': 'Veggie King', 'image': 'assets/nfts/veggie.png', 'owned': false},
+  final int points = 1250;
+  final List<LoyaltyNFT> nfts = [
+    LoyaltyNFT(id: 1, name: 'Golden Puff', imagePath: 'assets/nfts/golden.png', owned: true),
+    LoyaltyNFT(id: 2, name: 'Spicy Legend', imagePath: 'assets/nfts/spicy.png', owned: false),
+    LoyaltyNFT(id: 3, name: 'Cheese Master', imagePath: 'assets/nfts/cheese.png', owned: true),
+    LoyaltyNFT(id: 4, name: 'Veggie King', imagePath: 'assets/nfts/veggie.png', owned: false),
   ];
 
   @override
@@ -70,24 +88,24 @@ class _LoyaltyScreenState extends State<LoyaltyScreen> {
               itemBuilder: (context, index) {
                 final nft = nfts[index];
                 return Card(
-                  color: nft['owned']
+                  color: nft.owned
                       ? Theme.of(context).colorScheme.primaryContainer
-                      : Theme.of(context).colorScheme.surfaceVariant,
+                      : Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Column(
                     children: [
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Image.asset(nft['image']),
+                          child: Image.asset(nft.imagePath),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8),
                         child: Column(
                           children: [
-                            Text(nft['name']),
+                            Text(nft.name),
                             const SizedBox(height: 4),
-                            nft['owned']
+                            nft.owned
                                 ? const Chip(
                                     label: Text('OWNED'),
                                     backgroundColor: Colors.green,

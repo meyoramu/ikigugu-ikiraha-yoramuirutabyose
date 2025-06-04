@@ -1,11 +1,24 @@
 // features/social_sharing/presentation/screens/social_share_screen.dart
-import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
-import 'package:video_player/video_player.dart';
-import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:video_player/video_player.dart';
+
+/// A screen that allows users to record and share videos of their curry puffs.
+/// 
+/// This screen provides:
+/// * Camera access for video recording
+/// * Video preview functionality
+/// * Social media sharing capabilities
+/// * Automatic recording limits (15 seconds)
+/// * Error handling and retry options
 class SocialShareScreen extends StatefulWidget {
+  /// Creates a screen for recording and sharing curry puff videos.
+  /// 
+  /// This screen uses the device's camera to record videos and provides
+  /// options to preview and share them on various social media platforms.
   const SocialShareScreen({super.key});
 
   @override

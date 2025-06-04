@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = rive.OneShotAnimation('bounce', autoplay: true);
+    _controller = rive.OneShotAnimation('bounce');
   }
 
   @override

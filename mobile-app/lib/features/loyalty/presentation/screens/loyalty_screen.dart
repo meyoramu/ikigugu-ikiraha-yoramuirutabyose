@@ -3,11 +3,25 @@ import 'package:flutter/material.dart';
 
 /// A model class to represent an NFT in the loyalty program
 class LoyaltyNFT {
+  /// Unique identifier for the NFT
   final int id;
+
+  /// Display name of the NFT
   final String name;
+
+  /// Asset path to the NFT's image file
   final String imagePath;
+
+  /// Whether the user owns this NFT
   final bool owned;
 
+  /// Creates a new [LoyaltyNFT] instance.
+  /// 
+  /// All parameters are required:
+  /// - [id]: Unique identifier for the NFT
+  /// - [name]: Display name of the NFT
+  /// - [imagePath]: Asset path to the NFT's image file
+  /// - [owned]: Whether the user owns this NFT
   const LoyaltyNFT({
     required this.id,
     required this.name,

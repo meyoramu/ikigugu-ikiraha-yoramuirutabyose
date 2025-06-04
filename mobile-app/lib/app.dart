@@ -1,10 +1,6 @@
-// Core Flutter imports
 import 'package:flutter/material.dart';
 
-// Package imports
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-// Application imports
 import 'package:curry_puff_master/core/constants/app_themes.dart';
 import 'package:curry_puff_master/core/injection_container.dart' as di;
 import 'package:curry_puff_master/core/utils/route_generator.dart';

@@ -122,7 +122,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       if (response.status) {
         // Payment successful
         if (!mounted) return;
-        Navigator.pushNamed(context, '/order-confirmation');
+        await Navigator.pushNamed(context, '/order-confirmation');
       } else {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,4 @@
 // core/utils/route_generator.dart
-import 'package:flutter/material.dart';
 import 'package:curry_puff_master/features/ar_preview/presentation/screens/ar_puff_screen.dart';
 import 'package:curry_puff_master/features/cart/presentation/screens/checkout_screen.dart';
 import 'package:curry_puff_master/features/home/presentation/screens/home_screen.dart';
@@ -8,6 +7,7 @@ import 'package:curry_puff_master/features/order_tracking/presentation/screens/o
 import 'package:curry_puff_master/features/puff_builder/presentation/screens/puff_builder_screen.dart';
 import 'package:curry_puff_master/features/puff_sommelier/presentation/screens/sommelier_screen.dart';
 import 'package:curry_puff_master/features/social_sharing/presentation/screens/social_share_screen.dart';
+import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

@@ -2,10 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
+/// A screen that uses AI to recommend drinks that pair well with a specific curry puff.
+/// Uses TensorFlow Lite to process the puff ID and generate drink recommendations.
 class SommelierScreen extends StatefulWidget {
+  /// The unique identifier of the curry puff for which to get drink recommendations.
   final int puffId;
 
-  const SommelierScreen({required this.puffId, super.key});
+  /// Creates a new [SommelierScreen] instance.
+  /// 
+  /// Requires [puffId] to identify which curry puff to analyze.
+  const SommelierScreen({
+    required this.puffId,
+    super.key,
+  });
 
   @override
   State<SommelierScreen> createState() => _SommelierScreenState();
@@ -53,7 +62,8 @@ class _SommelierScreenState extends State<SommelierScreen> {
       ];
 
       // Output shape: [1, 4] - top 4 drink recommendations
-      final output = List.filled(1 * 4, 0.0).reshape([1, 4]);
+      final List<double> outputBuffer = List.filled(1 * 4, 0.0);
+      final output = outputBuffer.reshape<double>([1, 4]);
 
       // Run inference
       _interpreter!.run(input, output);
@@ -72,9 +82,9 @@ class _SommelierScreenState extends State<SommelierScreen> {
       ];
 
       // Get top 4 recommendations based on model output
-      final scores = output[0];
+      final List<double> scores = List<double>.from(output[0]);
       final recommendations = List.generate(4, (i) {
-        final maxIndex = scores.indexOf(scores.reduce((a, b) => a > b ? a : b));
+        final maxIndex = scores.indexWhere((score) => score == scores.reduce((double a, double b) => a > b ? a : b));
         scores[maxIndex] = -1; // Mark as used
         return drinkNames[maxIndex % drinkNames.length];
       });

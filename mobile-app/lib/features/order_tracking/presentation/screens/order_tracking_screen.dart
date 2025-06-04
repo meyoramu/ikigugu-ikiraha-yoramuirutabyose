@@ -3,9 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+/// A screen that displays real-time order tracking information.
+/// 
+/// This screen shows:
+/// * A map with the current location of the order
+/// * Markers for the store, delivery location, and current position
+/// * A route line showing the delivery path
+/// * A stepper widget indicating the order status
 class OrderTrackingScreen extends StatefulWidget {
+  /// The unique identifier for the order being tracked.
+  /// 
+  /// This ID is used to fetch real-time updates about the order's
+  /// location and status from the backend service.
   final String orderId;
 
+  /// Creates an order tracking screen.
+  /// 
+  /// The [orderId] parameter is required and must correspond to an
+  /// existing order in the system. This ID is used to track the
+  /// specific order's progress and location.
   const OrderTrackingScreen({required this.orderId, super.key});
 
   @override

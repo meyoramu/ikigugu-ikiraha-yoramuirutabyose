@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 class OrderTrackingScreen extends StatefulWidget {
   final String orderId;
 
-  const OrderTrackingScreen({super.key, required this.orderId});
+  const OrderTrackingScreen({required this.orderId, super.key});
 
   @override
   State<OrderTrackingScreen> createState() => _OrderTrackingScreenState();
@@ -121,7 +121,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                 Step(
                   title: Text('Delivered'),
                   content: Text('Enjoy your puff!'),
-                  isActive: false,
                 ),
               ],
             ),

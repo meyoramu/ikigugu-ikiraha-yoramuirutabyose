@@ -9,7 +9,27 @@ import 'package:curry_puff_master/features/puff_sommelier/presentation/screens/s
 import 'package:curry_puff_master/features/social_sharing/presentation/screens/social_share_screen.dart';
 import 'package:flutter/material.dart';
 
+/// Handles route generation and navigation throughout the app.
+/// 
+/// This class is responsible for managing navigation between different screens
+/// and handling route-specific arguments. It provides a centralized way to
+/// define and generate routes for the application.
 class RouteGenerator {
+  /// Generates a route based on the provided route settings.
+  /// 
+  /// Takes [settings] which contains the route name and any arguments passed
+  /// during navigation. Returns a [Route] object that defines the screen
+  /// to be displayed and how it should be animated.
+  /// 
+  /// Available routes:
+  /// * / - Home screen
+  /// * /puff-builder - Curry puff customization screen
+  /// * /ar-preview - AR preview screen (requires puffId)
+  /// * /sommelier - Puff sommelier recommendations (requires puffId)
+  /// * /loyalty - Customer loyalty program screen
+  /// * /social-share - Social sharing screen
+  /// * /checkout - Checkout screen (requires totalAmount)
+  /// * /order-tracking - Order tracking screen (requires orderId)
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':

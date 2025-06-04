@@ -5,7 +5,7 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 class SommelierScreen extends StatefulWidget {
   final int puffId;
 
-  const SommelierScreen({super.key, required this.puffId});
+  const SommelierScreen({required this.puffId, super.key});
 
   @override
   State<SommelierScreen> createState() => _SommelierScreenState();

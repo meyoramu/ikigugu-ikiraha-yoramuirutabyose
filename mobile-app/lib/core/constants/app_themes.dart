@@ -6,7 +6,6 @@ class AppThemes {
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: const Color(0xFFF57C00),
-      brightness: Brightness.light,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: true,

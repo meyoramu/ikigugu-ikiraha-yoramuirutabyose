@@ -38,7 +38,6 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
       final controller = CameraController(
         cameras.first,
         ResolutionPreset.medium,
-        enableAudio: true,
       );
 
       _cameraController = controller;

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:share_plus/share_plus.dart' as share_plus;
 import 'package:video_player/video_player.dart';
 
 /// A screen that allows users to record and share videos of their curry puffs.
@@ -115,17 +115,25 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
       }
 
       final box = context.findRenderObject() as RenderBox?;
-      final xFile = XFile(_lastRecordedVideo!.path);
-      await Share.shareXFiles(
-        [xFile],
-        text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
-        subject: 'My Curry Puff Creation',
-        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-      ).then((_) {
+      
+      await share_plus.SharePlus.instance.share(
+        share_plus.ShareParams(
+          text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
+          subject: 'My Curry Puff Creation',
+          files: [XFile(_lastRecordedVideo!.path)],
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+        ),
+      ).then((result) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Video shared successfully!')),
-          );
+          if (result.status == share_plus.ShareResultStatus.success) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Video shared successfully!')),
+            );
+          } else if (result.status == share_plus.ShareResultStatus.dismissed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Sharing cancelled')),
+            );
+          }
         }
       }).whenComplete(() {
         if (mounted) {

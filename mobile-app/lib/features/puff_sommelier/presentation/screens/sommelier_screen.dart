@@ -82,7 +82,7 @@ class _SommelierScreenState extends State<SommelierScreen> {
       ];
 
       // Get top 4 recommendations based on model output
-      final List<double> scores = List<double>.from(output[0]);
+      final List<double> scores = List<double>.from(output[0] as List<dynamic>);
       final recommendations = List.generate(4, (i) {
         final maxIndex = scores.indexWhere((score) => score == scores.reduce((double a, double b) => a > b ? a : b));
         scores[maxIndex] = -1; // Mark as used

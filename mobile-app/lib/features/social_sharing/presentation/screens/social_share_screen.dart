@@ -114,8 +114,8 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
         throw Exception('Video file not found');
       }
 
-      final result = await Share.shareFiles(
-        [_lastRecordedVideo!.path],
+      final result = await Share.shareXFiles(
+        [XFile(_lastRecordedVideo!.path)],
         text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
         subject: 'My Curry Puff Creation',
       );

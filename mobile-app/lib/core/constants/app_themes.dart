@@ -1,7 +1,9 @@
 // core/constants/app_themes.dart
 import 'package:flutter/material.dart';
 
+/// Provides theme configurations for the application.
 class AppThemes {
+  /// The light theme configuration.
   static final lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
@@ -21,6 +23,7 @@ class AppThemes {
     ),
   );
 
+  /// The dark theme configuration.
   static final darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(

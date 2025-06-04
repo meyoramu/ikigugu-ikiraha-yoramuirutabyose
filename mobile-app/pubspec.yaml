@@ -64,14 +64,22 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    # Base assets directory
     - assets/
+    
+    # Individual files
     - assets/logo.svg
-    - assets/animations/
+    - assets/triangle.png
+    
+    # Directory contents
+    - assets/animations/puff_3d.riv
+    - assets/models/puff_sommelier.tflite
+    
+    # Asset directories with wildcards
     - assets/images/
+    - assets/animations/
     - assets/models/
     - assets/textures/
-    - assets/triangle.png
-    - assets/models/puff_sommelier.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

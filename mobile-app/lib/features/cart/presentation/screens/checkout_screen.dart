@@ -6,7 +6,7 @@ import 'package:flutter_paystack/flutter_paystack.dart';
 class CheckoutScreen extends StatefulWidget {
   final double totalAmount;
 
-  const CheckoutScreen({super.key, required this.totalAmount});
+  const CheckoutScreen({required this.totalAmount, super.key});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();

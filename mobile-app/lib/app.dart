@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:curry_puff_master/core/constants/app_themes.dart';
 import 'package:curry_puff_master/core/injection_container.dart' as di;
 import 'package:curry_puff_master/core/utils/route_generator.dart';
 import 'package:curry_puff_master/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// The root widget of the Curry Puff Master application.
 ///

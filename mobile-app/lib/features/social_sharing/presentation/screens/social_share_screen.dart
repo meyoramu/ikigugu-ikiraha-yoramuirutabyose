@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:share_plus/src/share_plus_interface.dart';
 import 'package:video_player/video_player.dart';
 
 /// A screen that allows users to record and share videos of their curry puffs.
@@ -115,12 +114,9 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
         throw Exception('Video file not found');
       }
 
-      final result = await SharePlus.instance.share(
-        ShareParams(
-          files: [XFile(_lastRecordedVideo!.path)],
-          text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
-          subject: 'My Curry Puff Creation',
-        ),
+      final result = await Share.share(
+        'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
+        subject: 'My Curry Puff Creation',
       );
 
       if (mounted) {

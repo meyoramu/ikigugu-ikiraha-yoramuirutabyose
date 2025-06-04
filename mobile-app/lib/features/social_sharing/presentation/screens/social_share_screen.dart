@@ -114,24 +114,24 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
         throw Exception('Video file not found');
       }
 
-      final result = await Share.share(
-        'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
+      final box = context.findRenderObject() as RenderBox?;
+      final xFile = XFile(_lastRecordedVideo!.path);
+      await Share.shareXFiles(
+        [xFile],
+        text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
         subject: 'My Curry Puff Creation',
-      );
-
-      if (mounted) {
-        setState(() => _isSharing = false);
-        
-        if (result.status == ShareResultStatus.success) {
+        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      ).then((_) {
+        if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Video shared successfully!')),
           );
-        } else if (result.status == ShareResultStatus.dismissed) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Sharing cancelled')),
-          );
         }
-      }
+      }).whenComplete(() {
+        if (mounted) {
+          setState(() => _isSharing = false);
+        }
+      });
     } catch (e) {
       if (mounted) {
         setState(() {

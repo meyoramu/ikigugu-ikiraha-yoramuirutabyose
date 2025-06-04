@@ -20,6 +20,11 @@ class IkiguguLogo extends StatelessWidget {
   /// the app's primary color. Defaults to true.
   final bool withText;
   
+  /// Creates an Ikigugu logo widget.
+  /// 
+  /// * [size] - Controls the width and height of the logo image. Defaults to 120 logical pixels.
+  /// * [withText] - Whether to show the "IKIGUGU" text below the logo. Defaults to true.
+  /// * [key] - Controls how one widget replaces another widget in the tree.
   const IkiguguLogo({
     super.key,
     this.size = 120,

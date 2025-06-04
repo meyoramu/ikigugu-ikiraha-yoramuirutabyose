@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#FFD700"/>
+  <path d="M50,100 Q100,150 150,100 Q100,50 50,100" fill="#8B4513" stroke="#4A2500" stroke-width="4"/>
+  <circle cx="100" cy="100" r="30" fill="#8B4513"/>
+  <text x="100" y="170" text-anchor="middle" font-family="Arial" font-size="24" fill="#4A2500">Curry Puff</text>
+</svg> 

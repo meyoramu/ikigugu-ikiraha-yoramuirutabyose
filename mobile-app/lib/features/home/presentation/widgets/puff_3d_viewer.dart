@@ -2,9 +2,21 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
 
+/// A widget that displays a 3D model of a curry puff using Rive animation.
+///
+/// The widget supports interactive gestures like scaling and rotation, and
+/// provides smooth animations for user interactions.
 class Puff3DViewer extends StatefulWidget {
-  final rive.RiveAnimationController controller;
+  /// The controller for managing the primary animation of the 3D puff model.
+  ///
+  /// This controller is typically used for bounce or rotation animations
+  /// triggered by user interactions.
+  final rive.RiveAnimationController<rive.RuntimeArtboard> controller;
 
+  /// Creates a Puff3DViewer widget.
+  ///
+  /// The [controller] parameter is required and manages the primary animation
+  /// of the 3D puff model.
   const Puff3DViewer({required this.controller, super.key});
 
   @override
@@ -12,7 +24,7 @@ class Puff3DViewer extends StatefulWidget {
 }
 
 class _Puff3DViewerState extends State<Puff3DViewer> {
-  late rive.RiveAnimationController _scaleController;
+  late rive.RiveAnimationController<rive.RuntimeArtboard> _scaleController;
 
   @override
   void initState() {

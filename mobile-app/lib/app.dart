@@ -22,7 +22,6 @@ class CurryPuffMasterApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
-            themeMode: ThemeMode.system,
             initialRoute: '/',
             onGenerateRoute: RouteGenerator.generateRoute,
             builder: (context, child) {

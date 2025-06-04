@@ -12,7 +12,7 @@ import 'package:vector_math/vector_math_64.dart' as vector;
 class ARPuffScreen extends StatefulWidget {
   final int puffId;
 
-  const ARPuffScreen({super.key, required this.puffId});
+  const ARPuffScreen({required this.puffId, super.key});
 
   @override
   State<ARPuffScreen> createState() => _ARPuffScreenState();
@@ -61,8 +61,7 @@ class _ARPuffScreenState extends State<ARPuffScreen> {
     
     arSessionManager!.onInitialize(
       showFeaturePoints: true,
-      showPlanes: true,
-      customPlaneTexturePath: "assets/triangle.png",
+      customPlaneTexturePath: 'assets/triangle.png',
       showWorldOrigin: true,
     );
     arObjectManager!.onInitialize();

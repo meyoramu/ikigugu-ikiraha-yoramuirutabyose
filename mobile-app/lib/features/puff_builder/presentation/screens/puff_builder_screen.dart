@@ -2,7 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart' as rive;
 
+/// An interactive screen that allows users to customize their curry puff.
+/// 
+/// This screen provides a drag-and-drop interface where users can:
+/// * View a dynamic Rive animation of their curry puff
+/// * Drag ingredients onto the puff to add them
+/// * See available ingredients in a grid layout
+/// * Customize their puff with various fillings and toppings
 class PuffBuilderScreen extends StatefulWidget {
+  /// Creates a screen for building custom curry puffs.
+  /// 
+  /// This screen uses Rive animations to provide an interactive
+  /// and visually appealing curry puff customization experience.
   const PuffBuilderScreen({super.key});
 
   @override

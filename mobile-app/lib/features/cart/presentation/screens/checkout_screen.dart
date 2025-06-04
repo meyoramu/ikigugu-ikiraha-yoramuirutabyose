@@ -3,9 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 
+/// A screen that handles the checkout process and payment for orders.
+/// 
+/// This screen displays the order summary, collects payment details through
+/// a form, and processes the payment using the Paystack payment gateway.
+/// It shows the total amount to be paid and handles card validation.
 class CheckoutScreen extends StatefulWidget {
+  /// The total amount to be paid for the order.
+  /// 
+  /// This amount is displayed in the order summary and used to process
+  /// the payment through Paystack. It should be provided in the user's
+  /// local currency.
   final double totalAmount;
 
+  /// Creates a checkout screen for processing payments.
+  /// 
+  /// The [totalAmount] parameter is required and represents the total
+  /// amount to be paid for the order.
   const CheckoutScreen({required this.totalAmount, super.key});
 
   @override

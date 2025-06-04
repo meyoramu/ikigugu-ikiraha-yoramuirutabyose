@@ -1,8 +1,8 @@
 // features/social_sharing/presentation/screens/social_share_screen.dart
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
@@ -114,8 +114,8 @@ class _SocialShareScreenState extends State<SocialShareScreen> {
         throw Exception('Video file not found');
       }
 
-      final result = await SharePlus.instance.shareXFile(
-        file: _lastRecordedVideo!,
+      final result = await Share.shareFiles(
+        [_lastRecordedVideo!.path],
         text: 'Check out my delicious curry puff! 🥟✨ #CurryPuffMaster',
         subject: 'My Curry Puff Creation',
       );
